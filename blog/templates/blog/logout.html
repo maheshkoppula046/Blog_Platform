@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}All Blog Posts{% endblock %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <p>Are you sure you want to log out?</p>
+    <button type="submit">Yes, Log Out</button>
+</form>
+
+{% endblock %}

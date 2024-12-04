@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+
+    <!-- Display the image if it exists -->
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="Post Image" style="max-width: 100%; height: auto;">
+    {% else %}
+        <p>No image available for this post.</p>
+    {% endif %}
+
+    <h2>Comments</h2>
+    <ul>
+        {% for comment in comments %}
+        <li>
+            <strong>{{ comment.name }}</strong>
+            <p>{{ comment.content }}</p>
+        </li>
+        {% empty %}
+        <p>No comments yet. Be the first to comment!</p>
+        {% endfor %}
+    </ul>
+
+    <h3>Add a Comment</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Comment</button>
+    </form>
+{% endblock %}
+
